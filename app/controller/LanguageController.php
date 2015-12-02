@@ -16,4 +16,8 @@ class LanguageController extends fly\Controller{
     public static function main() {
         echo static::getClassName();
     }
+
+    public function handleInternal(){
+
+    }
 }

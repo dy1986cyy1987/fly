@@ -7,7 +7,7 @@
 
 namespace fly;
 
-class Controller implements ControllerInterface
+abstract class Controller implements ControllerInterface
 {
     public function beforeHandle()
     {
@@ -16,8 +16,10 @@ class Controller implements ControllerInterface
 
     public function handle()
     {
-
+        return $this->handleInternal();
     }
+
+    abstract function handleInternal();
 
     public function afterHandle()
     {
