@@ -6,79 +6,51 @@
  */
 function autoload($className)
 {
-
-    global $G_APP_AUTOLOAD_PATH;
-    $sys_load_path = include(SYS_PATH . 'autoload' . DS . 'loadpath.php');
-
+    set_include_path(get_include_path() . PATH_SEPARATOR . SYS_PATH . 'fly');
+    
+    if (empty($className)) {
+        throw new \fly\fly\SysException(json_encode(array(
+            'status' => '100001',
+            'errorMsg' => 'Class name is null!'
+        )));
+        exit();
+    }
+    
     // namespace process
-    if (strpos($className, '\\')) {
-        $exp = explode('\\', $className);
-        $className = end($exp);
-    }
-
-    $php_file = $className . '.php';
-
-    if (!file_exists($php_file)) {
-
-        if (empty($G_APP_AUTOLOAD_PATH)) {
-            $G_APP_AUTOLOAD_PATH = array();
-        }
-
-        $load_path = array_merge(
-            $G_APP_AUTOLOAD_PATH,
-            $sys_load_path
-        );
-
-        foreach ($load_path as $path) {
-            if (file_exists($path . $php_file)) {
-                include_once($path . $php_file);
-                break;
-            } else {
-                // foreach internal directories
-                $dirs = deepScanDir($path);
-
-                if ($dirs && count($dirs) > 1) {
-                    foreach ($dirs as $sub_path) {
-
-                        if (file_exists($sub_path . $php_file)) {
-                            include_once($sub_path . $php_file);
-                            break;
-                        }
-                    }
-                }
-            }
-        }
+    $php_file_prifix = str_replace('\\', DS, $className);
+    
+    $php_file = $php_file_prifix . '.php';
+    
+    trim($php_file, DS);
+    
+    $regex_fly = '/^(' . NAMESPACE_SYS_NAME . ')/';
+    $regex_app = '/^(' . NAMESPACE_APP_NAME . ')/';
+    
+    if (preg_match($regex_fly, $php_file)) {
+        $arr_exp = explode(DS, $php_file);
+        $arr_exp[0] = trim(SYS_PATH, DS);
+        $php_file = implode(DS, $arr_exp);
+    } elseif (preg_match($regex_app, $php_file)) {
+        $arr_exp = explode(DS, $php_file);
+        $arr_exp[0] = trim(APP_PATH, DS);
+        $php_file = implode(DS, $arr_exp);
     } else {
-        include_once($php_file);
+        throw new \fly\fly\SysException(json_encode(array(
+            'status' => 10003,
+            'errorMsg' => 'Don\'t support the your private namespace! Only support namespace (' . NAMESPACE_APP_NAME . ', ' . NAMESPACE_SYS_NAME . ')'
+        )));
+        exit();
     }
+    
+    if (! file_exists($php_file)) {
+        throw new \fly\fly\SysException(json_encode(array(
+            'status' => 10002,
+            'errorMsg' => 'File not exist!'
+        )));
+        exit();
+    }
+    
+    include_once ($php_file);
 }
 
 spl_autoload_register('autoload');
-
-// must be declared as global
-$G_DIR_ARR = array();
-
-/**
- * get sub directory
- * @param $dir
- * @return array
- */
-function deepScanDir($dir)
-{
-    global $G_DIR_ARR;
-    $dir = rtrim($dir, '\/');
-    $G_DIR_ARR[] = $dir . DS;
-
-    if (is_dir($dir)) {
-        $dirHandle = opendir($dir);
-        while (false !== ($fileName = readdir($dirHandle))) {
-            $subFile = $dir . DIRECTORY_SEPARATOR . $fileName;
-            if (is_dir($subFile) && str_replace('.', '', $fileName) != '') {
-                deepScanDir($subFile);
-            }
-        }
-        closedir($dirHandle);
-    }
-
-    return $G_DIR_ARR;
-}

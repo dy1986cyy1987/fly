@@ -4,15 +4,13 @@
  * @Author: dingyong
  * @Date: 2015/12/2 10:23
  */
+namespace fly\fly;
 
-namespace fly;
-
-abstract class Controller implements ControllerInterface
+abstract class Controller implements \fly\interfaces\ControllerInterface
 {
-    public function beforeHandle()
-    {
 
-    }
+    public function before()
+    {}
 
     public function handle()
     {
@@ -21,8 +19,6 @@ abstract class Controller implements ControllerInterface
 
     abstract function handleInternal();
 
-    public function afterHandle()
-    {
-
-    }
+    public function after()
+    {}
 }

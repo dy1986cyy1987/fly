@@ -1,22 +1,27 @@
 <?php
-
 define('DS', DIRECTORY_SEPARATOR);
 
-if (!defined('APP_PATH')) {
-    define ('APP_PATH', dirname(__FILE__) . DS);
+// app命名空间前缀
+define('NAMESPACE_APP_NAME', 'app');
+
+// 系统类命名空间前缀
+define('NAMESPACE_SYS_NAME', 'fly');
+
+if (! defined('APP_PATH')) {
+    define('APP_PATH', dirname(__FILE__) . DS);
 }
 
-if (!defined('SYS_PATH')) {
+if (! defined('SYS_PATH')) {
     define('SYS_PATH', APP_PATH . '..' . DS . 'sys' . DS);
 }
 
-// app auto load configurations
-$G_APP_AUTOLOAD_PATH = include(APP_PATH . 'autoload.php');
+// app路由解析目录
+$G_APP_ROUTE_PATH = include (APP_PATH . 'config' . DS . 'route.php');
 
 // must include the app entrance
-include_once(SYS_PATH . 'Fly.php');
+include_once (SYS_PATH . 'Fly.php');
 
 $fly = Fly::getInstance();
-$fly->setRequest(\fly\Request::getInstance());
-$fly->setResponse(\fly\Response::getInstance());
+$fly->setRequest(\fly\fly\Request::getInstance());
+$fly->setResponse(\fly\fly\Response::getInstance());
 $fly->run();
