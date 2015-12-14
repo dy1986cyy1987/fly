@@ -31,6 +31,9 @@ class Response
         return self::$instance;
     }
 
-    public function routeMapping()
+    public function getRouteMatches()
+    {}
+
+    public function getRouteMappings()
     {}
 }

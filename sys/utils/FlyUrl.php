@@ -16,7 +16,7 @@ class FlyUrl
      */
     public static function isSecurity()
     {
-        if (stripos($_SERVER['HTTP_PROTOCOL'], 'HTTPS') !== false) {
+        if (strtolower($_SERVER['REQUEST_SCHEME']) === 'https') {
             return true;
         }
         
@@ -100,10 +100,9 @@ class FlyUrl
     {
         $protocol = self::getProtocol();
         $host = self::getHost();
-        $port = self::getPort();
-        $str_port = $port == \fly\constants\Constant::DEFAULT_SERVER_PORT ? '' : ':' . $port;
         $uri = self::getRequestUri();
-        $full_url = $protocol . '://' . $host . $str_port . $uri;
+        
+        $full_url = $protocol . '://' . $host . $uri;
         
         return $full_url;
     }
@@ -125,9 +124,8 @@ class FlyUrl
         $protocol = self::getProtocol();
         $host = self::getHost();
         $port = self::getPort();
-        $str_port = $port == \fly\constants\Constant::DEFAULT_SERVER_PORT ? '' : ':' . $port;
         $uri = self::getRequestUri();
-        $full_url = $protocol . '://' . $host . $str_port . $uri;
+        $full_url = $protocol . '://' . $host . $uri;
         
         return array(
             'protocol' => $protocol,

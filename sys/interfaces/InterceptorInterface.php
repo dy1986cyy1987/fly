@@ -16,7 +16,5 @@ interface InterceptorInterface
 
     public function before();
 
-    public function ing();
-
     public function after();
 }

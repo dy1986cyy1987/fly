@@ -30,4 +30,19 @@ class Request
         
         return self::$instance;
     }
+
+    public function getFullUrl()
+    {
+        return \fly\utils\FlyUrl::getFullUrl();
+    }
+
+    public function getRequestUri()
+    {
+        return \fly\utils\FlyUrl::getRequestUri();
+    }
+
+    public function getQueryString()
+    {
+        return \fly\utils\FlyUrl::getQueryString();
+    }
 }

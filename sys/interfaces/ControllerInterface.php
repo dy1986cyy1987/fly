@@ -25,4 +25,10 @@ interface ControllerInterface
      * @return mixed
      */
     public function after();
+
+    /**
+     *
+     * @return boolean
+     */
+    public function checkParams();
 }

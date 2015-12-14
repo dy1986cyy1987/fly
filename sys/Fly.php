@@ -14,22 +14,32 @@ class Fly
     private static $instance;
 
     /**
+     * Router
      *
-     * @var \fly\fly\Controller
+     * @var \fly\fly\Router
      */
-    private $controller;
+    private $router;
 
     /**
+     * Request
      *
      * @var \fly\fly\Request
      */
     private $request;
 
     /**
+     * Response
      *
      * @var \fly\fly\Response
      */
     private $response;
+
+    /**
+     * Controller
+     *
+     * @var \fly\fly\Controller
+     */
+    private $controller;
 
     /**
      * set constructor private to refuse it init outside
@@ -39,9 +49,14 @@ class Fly
         $this->init();
     }
 
+    private function __clone()
+    {
+        // forbiden clone the Fly instance
+    }
+
     /**
      * 单例初始化
-     * 
+     *
      * @throws \fly\fly\SysException
      */
     private function init()
@@ -87,7 +102,12 @@ class Fly
      */
     public function setRequest($request)
     {
-        self::getInstance()->request = $request;
+        $this->request = $request;
+    }
+
+    public function getRequest()
+    {
+        return $this->request;
     }
 
     /**
@@ -98,11 +118,86 @@ class Fly
      */
     public function setResponse($response)
     {
-        self::getInstance()->response = $response;
+        $this->response = $response;
+    }
+
+    public function getResponse()
+    {
+        return $this->response;
+    }
+
+    /**
+     * set router
+     *
+     * @param \fly\fly\Router $router            
+     */
+    public function setRouter($router)
+    {
+        $this->router = $router;
+    }
+
+    public function getRouter()
+    {
+        return $this->router;
     }
 
     public function run()
     {
-        \app\controllers\Controller::main();
+        $this->beforeRun();
+        
+        $interceptors = $this->getInterceptors();
+        
+        if ($interceptors) {
+            $interceptors = is_array($interceptors) ? $interceptors : array(
+                $interceptors
+            );
+            
+            foreach ($interceptors as $interceptor) {
+                $obj_interceptor = new $interceptor();
+                $before_interceptor_result = $obj_interceptor->before();
+                
+                if ($before_interceptor_result == \fly\interceptors\SysGlobalInterceptor::STEP_BREAK) {
+                    continue;
+                } elseif ($before_interceptor_result == \fly\interceptors\SysGlobalInterceptor::STEP_EXIT) {
+                    break;
+                }
+            }
+        }
+        
+        $route_matches = $this->getRouteMatches();
+        $controller = $this->getController();
+        $this->controller = $controller;
+        
+        var_dump($controller);
+    }
+
+    private function beforeRun()
+    {
+        if (empty($this->router)) {
+            $this->router = new \fly\fly\Router();
+        }
+        
+        if (empty($this->request)) {
+            $this->request = new \fly\fly\Request();
+        }
+        
+        if (empty($this->response)) {
+            $this->response = new \fly\fly\Response();
+        }
+    }
+
+    public function getRouteMatches()
+    {
+        return $this->router->getRouteMatches();
+    }
+
+    public function getController()
+    {
+        return $this->router->getController();
+    }
+
+    public function getInterceptors()
+    {
+        return $this->router->getInterceptors();
     }
 }

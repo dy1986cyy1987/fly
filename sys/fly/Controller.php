@@ -21,4 +21,9 @@ abstract class Controller implements \fly\interfaces\ControllerInterface
 
     public function after()
     {}
+
+    public function checkParams()
+    {
+        return true;
+    }
 }

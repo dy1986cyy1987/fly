@@ -1,7 +1,7 @@
 <?php
 namespace fly\fly;
 
-class SysInterceptor implements \fly\interfaces\Interceptor
+class SysInterceptor implements \fly\interfaces\InterceptorInterface
 {
 
     /**
@@ -12,7 +12,7 @@ class SysInterceptor implements \fly\interfaces\Interceptor
      */
     public function before()
     {
-        // TODO Auto-generated method stub
+        return \fly\interfaces\InterceptorInterface::STEP_CONTINUE;
     }
 
     /**
@@ -23,6 +23,6 @@ class SysInterceptor implements \fly\interfaces\Interceptor
      */
     public function after()
     {
-        // TODO Auto-generated method stub
+        return \fly\interfaces\InterceptorInterface::STEP_CONTINUE;
     }
 }

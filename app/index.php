@@ -7,13 +7,8 @@ define('NAMESPACE_APP_NAME', 'app');
 // 系统类命名空间前缀
 define('NAMESPACE_SYS_NAME', 'fly');
 
-if (! defined('APP_PATH')) {
-    define('APP_PATH', dirname(__FILE__) . DS);
-}
-
-if (! defined('SYS_PATH')) {
-    define('SYS_PATH', APP_PATH . '..' . DS . 'sys' . DS);
-}
+define('APP_PATH', dirname(__FILE__) . DS);
+define('SYS_PATH', APP_PATH . '..' . DS . 'sys' . DS);
 
 // app路由解析目录
 $G_APP_ROUTE_PATH = include (APP_PATH . 'config' . DS . 'route.php');
@@ -22,6 +17,7 @@ $G_APP_ROUTE_PATH = include (APP_PATH . 'config' . DS . 'route.php');
 include_once (SYS_PATH . 'Fly.php');
 
 $fly = Fly::getInstance();
+$fly->setRouter(\fly\fly\Router::getInstance());
 $fly->setRequest(\fly\fly\Request::getInstance());
 $fly->setResponse(\fly\fly\Response::getInstance());
 $fly->run();
