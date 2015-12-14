@@ -71,7 +71,6 @@ class Fly
         
         if (! defined('NAMESPACE_APP_NAME')) {
             throw new \fly\fly\SysException('Please define NAMESPACE_APP_NAME first in the index.php');
-            exit();
         }
         
         if (! defined('NAMESPACE_SYS_NAME')) {
@@ -174,15 +173,15 @@ class Fly
     private function beforeRun()
     {
         if (empty($this->router)) {
-            $this->router = new \fly\fly\Router();
+            $this->router = \fly\fly\Router::getInstance();
         }
         
         if (empty($this->request)) {
-            $this->request = new \fly\fly\Request();
+            $this->request = \fly\fly\Request::getInstance();
         }
         
         if (empty($this->response)) {
-            $this->response = new \fly\fly\Response();
+            $this->response = \fly\fly\Response::getInstance();
         }
     }
 
