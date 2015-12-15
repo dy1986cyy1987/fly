@@ -9,6 +9,11 @@ namespace fly\fly;
 abstract class Controller implements \fly\interfaces\ControllerInterface
 {
 
+    public function checkParams()
+    {
+        return true;
+    }
+
     public function before()
     {}
 
@@ -22,8 +27,7 @@ abstract class Controller implements \fly\interfaces\ControllerInterface
     public function after()
     {}
 
-    public function checkParams()
-    {
-        return true;
+    public function getView(){
+        return array();
     }
 }

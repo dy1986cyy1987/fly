@@ -166,6 +166,14 @@ class Fly
         $route_matches = $this->getRouteMatches();
         $controller = $this->getController();
         $this->controller = $controller;
+
+        // execute controller
+        if (!$this->controller->checkParams()) {
+            return false;
+        }
+        $this->controller->before();
+        $this->controller->handle();
+        $this->controller->after();
         
         var_dump($controller);
     }
