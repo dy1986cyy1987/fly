@@ -1,22 +1,25 @@
 <?php
+
 namespace app\interceptors;
+
+use \fly\fly as f_fly;
 
 /**
  * App全局拦截器
  *
  * @author dingyong
- *        
+ *
  */
-class GlobalInterceptor extends \fly\fly\SysInterceptor
+class GlobalInterceptor extends f_fly\SysInterceptor
 {
 
-    public function berfore()
+    public function before()
     {
-        parent::before();
+        return parent::before();
     }
 
     public function after()
     {
-        parent::after();
+        return parent::after();
     }
 }

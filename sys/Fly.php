@@ -175,7 +175,7 @@ class Fly
         }
 
         if ($bol_exit) {
-            return false;
+            exit(0);
         }
 
         // execute controller without render
@@ -214,7 +214,7 @@ class Fly
         }
 
         if ($bol_exit) {
-            return false;
+            exit(0);
         }
 
         // render page
