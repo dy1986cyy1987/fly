@@ -10,9 +10,6 @@ define('NAMESPACE_SYS_NAME', 'fly');
 define('APP_PATH', dirname(__FILE__) . DS);
 define('SYS_PATH', APP_PATH . '..' . DS . 'sys' . DS);
 
-// app路由解析目录
-$G_APP_ROUTE_PATH = include (APP_PATH . 'config' . DS . 'route.php');
-
 // must include the app entrance
 include_once (SYS_PATH . 'Fly.php');
 
