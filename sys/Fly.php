@@ -42,6 +42,13 @@ class Fly
     private $controller;
 
     /**
+     * @var \fly\fly\View
+     */
+    private $view;
+
+    private $_attributes = array();
+
+    /**
      * set constructor private to refuse it init outside
      */
     private function __construct()
@@ -147,6 +154,8 @@ class Fly
         // execute before interceptors
         $interceptors = $this->getInterceptors();
 
+        $bol_exit = false;
+
         if ($interceptors) {
             $interceptors = is_array($interceptors) ? $interceptors : array(
                 $interceptors,
@@ -159,9 +168,14 @@ class Fly
                 if ($before_interceptor_result == \fly\interceptors\SysGlobalInterceptor::STEP_BREAK) {
                     continue;
                 } elseif ($before_interceptor_result == \fly\interceptors\SysGlobalInterceptor::STEP_EXIT) {
+                    $bol_exit = true;
                     break;
                 }
             }
+        }
+
+        if ($bol_exit) {
+            return false;
         }
 
         // execute controller without render
@@ -193,13 +207,25 @@ class Fly
                 if ($before_interceptor_result == \fly\interceptors\SysGlobalInterceptor::STEP_BREAK) {
                     continue;
                 } elseif ($before_interceptor_result == \fly\interceptors\SysGlobalInterceptor::STEP_EXIT) {
+                    $bol_exit = true;
                     break;
                 }
             }
         }
 
+        if ($bol_exit) {
+            return false;
+        }
+
         // render page
-        $this->controller->render($view);
+        if (!$view) {
+            return false;
+        }
+
+        $this->view  = new $view();
+        $this->view->render();
+
+        return true;
     }
 
     private function beforeRun()
@@ -230,5 +256,27 @@ class Fly
     public function getInterceptors()
     {
         return $this->router->getInterceptors();
+    }
+
+    public function setAttribute($key, $value){
+        $this->_attributes[$key] = $value;
+    }
+
+    public function setAttributes($attributes = array()){
+        if (is_array($attributes) && !empty($attributes)) {
+            $this->_attributes = array_merge($this->_attributes, $attributes);
+        }
+    }
+
+    public function getAttribute($key){
+        if (array_key_exists($key, $this->_attributes)) {
+            return $this->_attributes[$key];
+        }
+
+        return false;
+    }
+
+    public function getAttributes(){
+        return $this->_attributes;
     }
 }
