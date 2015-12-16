@@ -1,7 +1,9 @@
 <?php
 namespace fly\interceptors;
 
-class SysGlobalInterceptor extends \fly\fly\SysInterceptor
+use \fly\fly as f_fly;
+
+class SysGlobalInterceptor extends f_fly\SysInterceptor
 {
 
     public function before()

@@ -6,7 +6,9 @@
  */
 namespace fly\fly;
 
-abstract class Controller implements \fly\interfaces\ControllerInterface
+use \fly\interfaces as i_faces;
+
+abstract class Controller implements i_faces\ControllerInterface
 {
 
     public function checkParams()
@@ -14,7 +16,7 @@ abstract class Controller implements \fly\interfaces\ControllerInterface
         return true;
     }
 
-    public function before()
+    public function beforeHandle()
     {}
 
     public function handle()
@@ -22,12 +24,9 @@ abstract class Controller implements \fly\interfaces\ControllerInterface
         return $this->handleInternal();
     }
 
-    abstract function handleInternal();
+    public function render($view){
 
-    public function after()
-    {}
-
-    public function getView(){
-        return array();
     }
+
+    abstract function handleInternal();
 }

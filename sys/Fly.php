@@ -2,7 +2,7 @@
 
 /**
  * @Author: dingyong
- * @Date: 2015/12/2 9:45
+ * @Date  : 2015/12/2 9:45
  */
 class Fly
 {
@@ -61,23 +61,23 @@ class Fly
      */
     private function init()
     {
-        if (! defined('DS')) {
+        if (!defined('DS')) {
             define('DS', DIRECTORY_SEPARATOR);
         }
-        
-        if (! defined('SYS_PATH')) {
+
+        if (!defined('SYS_PATH')) {
             define('SYS_PATH', dirname(__FILE__));
         }
-        
-        if (! defined('NAMESPACE_APP_NAME')) {
+
+        if (!defined('NAMESPACE_APP_NAME')) {
             throw new \fly\fly\SysException('Please define NAMESPACE_APP_NAME first in the index.php');
         }
-        
-        if (! defined('NAMESPACE_SYS_NAME')) {
+
+        if (!defined('NAMESPACE_SYS_NAME')) {
             define('NAMESPACE_SYS_NAME', 'fly');
         }
-        
-        include_once (SYS_PATH . 'autoload' . DS . 'functions.php');
+
+        include_once(SYS_PATH . 'autoload' . DS . 'functions.php');
     }
 
     /**
@@ -86,10 +86,10 @@ class Fly
      */
     public static function &getInstance()
     {
-        if (! self::$instance) {
+        if (!self::$instance) {
             self::$instance = new self();
         }
-        
+
         return self::$instance;
     }
 
@@ -128,7 +128,7 @@ class Fly
     /**
      * set router
      *
-     * @param \fly\fly\Router $router            
+     * @param \fly\fly\Router $router
      */
     public function setRouter($router)
     {
@@ -143,18 +143,19 @@ class Fly
     public function run()
     {
         $this->beforeRun();
-        
+
+        // execute before interceptors
         $interceptors = $this->getInterceptors();
-        
+
         if ($interceptors) {
             $interceptors = is_array($interceptors) ? $interceptors : array(
-                $interceptors
+                $interceptors,
             );
-            
+
             foreach ($interceptors as $interceptor) {
                 $obj_interceptor = new $interceptor();
                 $before_interceptor_result = $obj_interceptor->before();
-                
+
                 if ($before_interceptor_result == \fly\interceptors\SysGlobalInterceptor::STEP_BREAK) {
                     continue;
                 } elseif ($before_interceptor_result == \fly\interceptors\SysGlobalInterceptor::STEP_EXIT) {
@@ -162,20 +163,43 @@ class Fly
                 }
             }
         }
-        
-        $route_matches = $this->getRouteMatches();
-        $controller = $this->getController();
-        $this->controller = $controller;
 
-        // execute controller
-        if (!$this->controller->checkParams()) {
-            return false;
+        // execute controller without render
+        $controller_name = $this->getControllerName();
+
+        if (empty($controller_name)) {
+            throw new \fly\fly\SysException('Can\'t find the controller!');
         }
-        $this->controller->before();
-        $this->controller->handle();
-        $this->controller->after();
-        
-        var_dump($controller);
+
+        $this->controller = new $controller_name();
+
+        if (!$this->controller->checkParams()) {
+            throw new \fly\fly\SysException('Controller check params failed!');
+        }
+
+        $this->controller->beforeHandle();
+        $view = $this->controller->handle();
+
+        // execute after interceptor
+        if ($interceptors) {
+            $interceptors = is_array($interceptors) ? $interceptors : array(
+                $interceptors,
+            );
+
+            foreach ($interceptors as $interceptor) {
+                $obj_interceptor = new $interceptor();
+                $before_interceptor_result = $obj_interceptor->after();
+
+                if ($before_interceptor_result == \fly\interceptors\SysGlobalInterceptor::STEP_BREAK) {
+                    continue;
+                } elseif ($before_interceptor_result == \fly\interceptors\SysGlobalInterceptor::STEP_EXIT) {
+                    break;
+                }
+            }
+        }
+
+        // render page
+        $this->controller->render($view);
     }
 
     private function beforeRun()
@@ -183,11 +207,11 @@ class Fly
         if (empty($this->router)) {
             $this->router = \fly\fly\Router::getInstance();
         }
-        
+
         if (empty($this->request)) {
             $this->request = \fly\fly\Request::getInstance();
         }
-        
+
         if (empty($this->response)) {
             $this->response = \fly\fly\Response::getInstance();
         }
@@ -198,7 +222,7 @@ class Fly
         return $this->router->getRouteMatches();
     }
 
-    public function getController()
+    public function getControllerName()
     {
         return $this->router->getController();
     }

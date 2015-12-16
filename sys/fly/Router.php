@@ -6,6 +6,8 @@
  */
 namespace fly\fly;
 
+use \fly\utils as f_utils;
+
 class Router
 {
 
@@ -28,7 +30,7 @@ class Router
 
     /**
      *
-     * @return Route
+     * @return \fly\fly\Router
      */
     public static function &getInstance()
     {
@@ -42,7 +44,7 @@ class Router
     /**
      * get controller from uri
      *
-     * @return \fly\fly\Controller
+     * @return String '\fly\fly\Controller'
      */
     public function getController()
     {
@@ -63,15 +65,14 @@ class Router
     }
 
     /**
-     * get controller or route matches base on uri
+     * @param bool|true $bol_ret_controller
      *
-     * @param string $bol_ret_controller            
-     * @return array|string
+     * @return array|int|string
      */
     private function mapping($bol_ret_controller = true)
     {
-        $request_uri = \fly\utils\FlyUrl::getRequestUri();
-        $route_mappings = \fly\utils\LoadGlobalConfig::loadRouteMappings();
+        $request_uri = f_utils\FlyUrl::getRequestUri();
+        $route_mappings = f_utils\LoadGlobalConfig::loadRouteMappings();
         
         foreach ($route_mappings as $controller => $patterns) {
             if (is_array($patterns)) {
@@ -118,7 +119,7 @@ class Router
      */
     public function getSysInterceptors()
     {
-        return \fly\utils\LoadGlobalConfig::loadSysInterceptors();
+        return f_utils\LoadGlobalConfig::loadSysInterceptors();
     }
 
     /**
@@ -127,7 +128,7 @@ class Router
      */
     public function getAppInterceptors()
     {
-        return \fly\utils\LoadGlobalConfig::loadAppInterceptors($this->getController());
+        return f_utils\LoadGlobalConfig::loadAppInterceptors($this->getController());
     }
 
     /**
@@ -136,9 +137,9 @@ class Router
      */
     public function getInterceptors()
     {
-        $sys_inteceptors = $this->getSysInterceptors();
-        $app_inteceptors = $this->getAppInterceptors();
+        $sys_interceptors = $this->getSysInterceptors();
+        $app_interceptors = $this->getAppInterceptors();
         
-        return array_unique(array_merge($sys_inteceptors, $app_inteceptors));
+        return array_unique(array_merge($sys_interceptors, $app_interceptors));
     }
 }

@@ -1,7 +1,9 @@
 <?php
 namespace fly\fly;
 
-class SysInterceptor implements \fly\interfaces\InterceptorInterface
+use \fly\interfaces as f_faces;
+
+class SysInterceptor implements f_faces\InterceptorInterface
 {
 
     /**
@@ -12,7 +14,7 @@ class SysInterceptor implements \fly\interfaces\InterceptorInterface
      */
     public function before()
     {
-        return \fly\interfaces\InterceptorInterface::STEP_CONTINUE;
+        return f_faces\InterceptorInterface::STEP_CONTINUE;
     }
 
     /**
@@ -23,6 +25,6 @@ class SysInterceptor implements \fly\interfaces\InterceptorInterface
      */
     public function after()
     {
-        return \fly\interfaces\InterceptorInterface::STEP_CONTINUE;
+        return f_faces\InterceptorInterface::STEP_CONTINUE;
     }
 }

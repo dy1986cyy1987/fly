@@ -12,19 +12,13 @@ interface ControllerInterface
      *
      * @return mixed
      */
-    public function before();
+    public function beforeHandle();
 
     /**
      *
      * @return mixed
      */
     public function handle();
-
-    /**
-     *
-     * @return mixed
-     */
-    public function after();
 
     /**
      *

@@ -6,6 +6,8 @@
  */
 namespace fly\fly;
 
+use \fly\utils as f_utils;
+
 class Request
 {
 
@@ -33,16 +35,16 @@ class Request
 
     public function getFullUrl()
     {
-        return \fly\utils\FlyUrl::getFullUrl();
+        return f_utils\FlyUrl::getFullUrl();
     }
 
     public function getRequestUri()
     {
-        return \fly\utils\FlyUrl::getRequestUri();
+        return f_utils\FlyUrl::getRequestUri();
     }
 
     public function getQueryString()
     {
-        return \fly\utils\FlyUrl::getQueryString();
+        return f_utils\FlyUrl::getQueryString();
     }
 }
