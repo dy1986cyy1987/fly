@@ -114,6 +114,19 @@ class Router
     }
 
     /**
+     * get view file_path
+     * @param        $viewName
+     * @param string $ext
+     *
+     * @return string
+     */
+    public function getView($viewName, $ext = '.php'){
+        $class_name = APP_PATH . 'views' . DS . $viewName . $ext;
+
+        return $class_name;
+    }
+
+    /**
      *
      * @return array
      */

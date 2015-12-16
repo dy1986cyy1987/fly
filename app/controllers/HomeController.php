@@ -13,5 +13,6 @@ class HomeController extends f_fly\Controller
 
     public function handleInternal()
     {
+        return 'home';
     }
 }

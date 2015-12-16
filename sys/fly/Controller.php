@@ -24,8 +24,18 @@ abstract class Controller implements i_faces\ControllerInterface
         return $this->handleInternal();
     }
 
-    public function render($view){
+    public function render($view, $params = array()){
+        if (empty($view) || !is_string($view)) {
+            return false;
+        }
 
+        $view_file = \Fly::getInstance()->getRouter()->getView($view);
+
+        if (file_exists($view_file)) {
+            include $view_file;
+        }
+
+        return true;
     }
 
     abstract function handleInternal();
