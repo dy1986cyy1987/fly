@@ -40,4 +40,10 @@ abstract class View {
     }
 
     abstract function setPageName();
+
+    abstract function getTitle();
+
+    abstract function getDescription();
+
+    abstract function getMeta();
 }

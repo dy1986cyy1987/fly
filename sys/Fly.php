@@ -243,16 +243,25 @@ class Fly
         }
     }
 
+    /**
+     * @return array
+     */
     public function getRouteMatches()
     {
         return $this->router->getRouteMatches();
     }
 
+    /**
+     * @return String
+     */
     public function getControllerName()
     {
         return $this->router->getController();
     }
 
+    /**
+     * @return array
+     */
     public function getInterceptors()
     {
         return $this->router->getInterceptors();
