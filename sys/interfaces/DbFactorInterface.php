@@ -1,7 +1,12 @@
 <?php
-
 namespace fly\interfaces;
 
-interface DbFactorInterface {
+interface DbFactorInterface
+{
+
     public function changeFactory($factor);
+
+    public function getDbName();
+
+    public function getTableName();
 }

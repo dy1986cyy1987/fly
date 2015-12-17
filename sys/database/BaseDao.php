@@ -1,7 +1,12 @@
 <?php
-
 namespace fly\database;
 
-class BaseDao extends \PDO {
+class BaseDao extends \PDO
+{
 
+    /**
+     *
+     * @var \fly\database\Factor
+     */
+    protected $factor;
 }
