@@ -25,4 +25,6 @@ class Constant
     const DB_CONFIG_PASSWORD = 'password';
 
     const DB_CONFIG_OPTIONS = 'options';
+
+    const DB_CONFIG_NAME_IN_APP = 'database.php';
 }
