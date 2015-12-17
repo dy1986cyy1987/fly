@@ -4,6 +4,7 @@ namespace fly\database\factory;
 use \fly\utils as f_utils;
 use \fly\fly as f_fly;
 use \fly\database as f_database;
+use \fly\constants as f_constant;
 
 class DbFactory
 {
@@ -38,11 +39,13 @@ class DbFactory
             throw new f_fly\SysException('Db configure is wrong! key = ' . $db_config_key);
         }
 
-        if (empty($factor) || !$factor instanceof f_database\Factor) {
+        $dsn = f_utils\DbTools::getDsn($config, $factor);
+        $username = $config[f_constant\Constant::DB_CONFIG_USERNAME];
+        $password = $config[f_constant\Constant::DB_CONFIG_PASSWORD];
+        $options = isset($config[f_constant\Constant::DB_CONFIG_OPTIONS]) ? $config[f_constant\Constant::DB_CONFIG_OPTIONS] : array();
+        $connection = new \PDO($dsn, $username, $password, $options);
+        self::$_connections[$db_config_key] = $connection;
 
-        } else {
-
-        }
-
+        return self::$_connections[$db_config_key];
     }
 }
