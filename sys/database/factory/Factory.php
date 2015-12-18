@@ -32,7 +32,7 @@ class Factory
         $username = $config[f_constants\Constant::DB_CONFIG_USERNAME];
         $password = $config[f_constants\Constant::DB_CONFIG_PASSWORD];
         $options = isset($config[f_constants\Constant::DB_CONFIG_OPTIONS]) ? $config[f_constants\Constant::DB_CONFIG_OPTIONS] : array();
-        $connection = new \PDO($realStrDsn, $username, $password);
+        $connection = new \PDO($realStrDsn, $username, $password, $options);
         
         self::$instances[$dsn] = $connection;
         
