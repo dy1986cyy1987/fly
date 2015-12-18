@@ -1,4 +1,6 @@
 <?php
+define('__DEBUG', true);
+
 define('DS', DIRECTORY_SEPARATOR);
 
 // app命名空间前缀

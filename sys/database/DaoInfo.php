@@ -1,6 +1,8 @@
 <?php
 namespace fly\database;
 
+use \fly\constants as f_constants;
+
 class DaoInfo
 {
 
@@ -18,15 +20,20 @@ class DaoInfo
 
     public $slaveDsn;
 
-    public $bolSpilt = false;
-
-    public $codeStyle = 'object';
+    public $pkName = f_constants\Constant::NOT_EXIST_PK_NAME;
 
     /**
+     * \fly\database\BaseModel
      *
-     * @var object
+     * @var string
      */
-    public $model;
+    public $modelClass;
+
+    public $bolSpilt = false;
+
+    public $codeStyle = \PDO::FETCH_OBJ;
+
+    public $useMasterDsn = true;
 
     /**
      *

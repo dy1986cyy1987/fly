@@ -36,12 +36,11 @@ class DbTools
     /**
      *
      * @param \fly\database\DaoInfo $objDaoInfo            
-     * @param boolean $useMasterDsn            
      * @return string
      */
-    public static function buildDsnByDaoInfo($objDaoInfo, $useMasterDsn = true)
+    public static function buildDsnByDaoInfo($objDaoInfo)
     {
-        $dsn = $useMasterDsn ? $objDaoInfo->masterDsn : $objDaoInfo->slaveDsn;
+        $dsn = $objDaoInfo->useMasterDsn ? $objDaoInfo->masterDsn : $objDaoInfo->slaveDsn;
         $config = self::getConfigByDsn($dsn);
         $host = $config[f_constants\Constant::DB_CONFIG_HOST];
         $dbName = $objDaoInfo->dbName;

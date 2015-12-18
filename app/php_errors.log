@@ -1,0 +1,52 @@
+[18-Dec-2015 13:06:31 PRC] PHP Fatal error:  Uncaught exception 'fly\fly\SysException' with message 'Does not exits db configure file in APP_PATH!' in D:\webapp\fly\sys\utils\DbTools.php:24
+Stack trace:
+#0 D:\webapp\fly\sys\utils\DbTools.php(44): fly\utils\DbTools::getConfigByDsn('home')
+#1 D:\webapp\fly\sys\database\factory\Factory.php(30): fly\utils\DbTools::buildDsnByDaoInfo(Object(fly\database\DaoInfo))
+#2 D:\webapp\fly\sys\database\BaseDao.php(26): fly\database\factory\Factory::getInstance(Object(fly\database\DaoInfo))
+#3 D:\webapp\fly\app\controllers\HomeController.php(20): fly\database\BaseDao->__construct()
+#4 D:\webapp\fly\sys\fly\Controller.php(24): app\controllers\HomeController->handleInternal()
+#5 D:\webapp\fly\sys\Fly.php(200): fly\fly\Controller->handle()
+#6 D:\webapp\fly\app\index.php(22): Fly->run()
+#7 {main}
+  thrown in D:\webapp\fly\sys\utils\DbTools.php on line 24
+[18-Dec-2015 13:12:21 PRC] PHP Fatal error:  Uncaught exception 'fly\fly\SysException' with message 'Empty db configure exception!' in D:\webapp\fly\sys\utils\DbTools.php:30
+Stack trace:
+#0 D:\webapp\fly\sys\utils\DbTools.php(44): fly\utils\DbTools::getConfigByDsn('home')
+#1 D:\webapp\fly\sys\database\factory\Factory.php(30): fly\utils\DbTools::buildDsnByDaoInfo(Object(fly\database\DaoInfo))
+#2 D:\webapp\fly\sys\database\BaseDao.php(26): fly\database\factory\Factory::getInstance(Object(fly\database\DaoInfo))
+#3 D:\webapp\fly\app\controllers\HomeController.php(20): fly\database\BaseDao->__construct()
+#4 D:\webapp\fly\sys\fly\Controller.php(24): app\controllers\HomeController->handleInternal()
+#5 D:\webapp\fly\sys\Fly.php(200): fly\fly\Controller->handle()
+#6 D:\webapp\fly\app\index.php(22): Fly->run()
+#7 {main}
+  thrown in D:\webapp\fly\sys\utils\DbTools.php on line 30
+[18-Dec-2015 13:14:04 PRC] PHP Notice:  Undefined index: password in D:\webapp\fly\sys\database\factory\Factory.php on line 33
+[18-Dec-2015 13:14:04 PRC] PHP Warning:  PDOStatement::execute() expects parameter 1 to be array, string given in D:\webapp\fly\sys\database\BaseDao.php on line 125
+[18-Dec-2015 13:15:44 PRC] PHP Warning:  PDOStatement::execute() expects parameter 1 to be array, string given in D:\webapp\fly\sys\database\BaseDao.php on line 125
+[18-Dec-2015 13:18:32 PRC] PHP Fatal error:  Call to undefined method PDOStatement::exec() in D:\webapp\fly\sys\database\BaseDao.php on line 125
+[18-Dec-2015 13:19:13 PRC] PHP Warning:  PDO::exec() expects parameter 1 to be string, object given in D:\webapp\fly\sys\database\BaseDao.php on line 125
+[18-Dec-2015 13:21:01 PRC] PHP Warning:  PDOStatement::execute(): SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens in D:\webapp\fly\sys\database\BaseDao.php on line 91
+[18-Dec-2015 13:21:04 PRC] PHP Warning:  PDOStatement::execute(): SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens in D:\webapp\fly\sys\database\BaseDao.php on line 91
+[18-Dec-2015 13:49:01 PRC] PHP Warning:  PDOStatement::execute(): SQLSTATE[HY093]: Invalid parameter number: no parameters were bound in D:\webapp\fly\sys\database\BaseDao.php on line 125
+[18-Dec-2015 13:53:21 PRC] PHP Warning:  PDOStatement::execute(): SQLSTATE[HY093]: Invalid parameter number: no parameters were bound in D:\webapp\fly\sys\database\BaseDao.php on line 125
+[18-Dec-2015 14:12:20 PRC] PHP Warning:  PDOStatement::execute(): SQLSTATE[HY093]: Invalid parameter number: no parameters were bound in D:\webapp\fly\sys\database\BaseDao.php on line 91
+[18-Dec-2015 14:28:39 PRC] PHP Notice:  Undefined variable: statement in D:\webapp\fly\sys\database\BaseDao.php on line 195
+[18-Dec-2015 14:28:39 PRC] PHP Warning:  PDOStatement::execute() expects parameter 1 to be array, string given in D:\webapp\fly\sys\database\BaseDao.php on line 198
+[18-Dec-2015 14:29:23 PRC] PHP Notice:  Undefined variable: statement in D:\webapp\fly\sys\database\BaseDao.php on line 195
+[18-Dec-2015 14:29:23 PRC] PHP Warning:  PDOStatement::execute(): SQLSTATE[HY093]: Invalid parameter number: no parameters were bound in D:\webapp\fly\sys\database\BaseDao.php on line 198
+[18-Dec-2015 14:29:24 PRC] PHP Notice:  Undefined variable: statement in D:\webapp\fly\sys\database\BaseDao.php on line 195
+[18-Dec-2015 14:29:24 PRC] PHP Warning:  PDOStatement::execute(): SQLSTATE[HY093]: Invalid parameter number: no parameters were bound in D:\webapp\fly\sys\database\BaseDao.php on line 198
+[18-Dec-2015 14:29:24 PRC] PHP Notice:  Undefined variable: statement in D:\webapp\fly\sys\database\BaseDao.php on line 195
+[18-Dec-2015 14:29:24 PRC] PHP Warning:  PDOStatement::execute(): SQLSTATE[HY093]: Invalid parameter number: no parameters were bound in D:\webapp\fly\sys\database\BaseDao.php on line 198
+[18-Dec-2015 14:29:24 PRC] PHP Notice:  Undefined variable: statement in D:\webapp\fly\sys\database\BaseDao.php on line 195
+[18-Dec-2015 14:29:24 PRC] PHP Warning:  PDOStatement::execute(): SQLSTATE[HY093]: Invalid parameter number: no parameters were bound in D:\webapp\fly\sys\database\BaseDao.php on line 198
+[18-Dec-2015 14:29:25 PRC] PHP Notice:  Undefined variable: statement in D:\webapp\fly\sys\database\BaseDao.php on line 195
+[18-Dec-2015 14:29:25 PRC] PHP Warning:  PDOStatement::execute(): SQLSTATE[HY093]: Invalid parameter number: no parameters were bound in D:\webapp\fly\sys\database\BaseDao.php on line 198
+[18-Dec-2015 14:29:28 PRC] PHP Notice:  Undefined variable: statement in D:\webapp\fly\sys\database\BaseDao.php on line 195
+[18-Dec-2015 14:29:28 PRC] PHP Warning:  PDOStatement::execute(): SQLSTATE[HY093]: Invalid parameter number: no parameters were bound in D:\webapp\fly\sys\database\BaseDao.php on line 198
+[18-Dec-2015 14:51:18 PRC] PHP Warning:  Missing argument 1 for fly\database\BaseDao::findByPkIds(), called in D:\webapp\fly\app\controllers\HomeController.php on line 25 and defined in D:\webapp\fly\sys\database\BaseDao.php on line 46
+[18-Dec-2015 14:51:19 PRC] PHP Warning:  Missing argument 1 for fly\database\BaseDao::findByPkIds(), called in D:\webapp\fly\app\controllers\HomeController.php on line 25 and defined in D:\webapp\fly\sys\database\BaseDao.php on line 46
+[18-Dec-2015 15:17:31 PRC] PHP Notice:  Undefined variable: statement in D:\webapp\fly\sys\database\BaseDao.php on line 308
+[18-Dec-2015 15:17:31 PRC] PHP Warning:  PDOStatement::execute(): SQLSTATE[HY093]: Invalid parameter number: no parameters were bound in D:\webapp\fly\sys\database\BaseDao.php on line 311
+[18-Dec-2015 15:18:19 PRC] PHP Notice:  Undefined variable: statement in D:\webapp\fly\sys\database\BaseDao.php on line 308
+[18-Dec-2015 15:18:22 PRC] PHP Notice:  Undefined variable: statement in D:\webapp\fly\sys\database\BaseDao.php on line 308

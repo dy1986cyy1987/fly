@@ -10,6 +10,8 @@ class Constant
 
     const DEFAULT_SERVER_PORT = 80;
 
+    const NOT_EXIST_PK_NAME = 'NOT_EXTIST_PK_NAME';
+
     const DB_CONFIG_SQL_TYPE = 'sqlType';
 
     const DB_CONFIG_HOST = 'host';
@@ -27,4 +29,6 @@ class Constant
     const DB_CONFIG_OPTIONS = 'options';
 
     const DB_CONFIG_NAME_IN_APP = 'database.php';
+
+    const DB_FIND_EACH_MAX_NUM = 500;
 }

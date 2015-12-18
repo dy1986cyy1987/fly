@@ -8,10 +8,14 @@ $config = array(
         f_constant\Constant::DB_CONFIG_PORT => '3306',
         f_constant\Constant::DB_CONFIG_DB_PREFIX => '',
         f_constant\Constant::DB_CONFIG_TAB_PREFIX => '',
-        f_constant\Constant::DB_CONFIG_USERNAME => '',
+        f_constant\Constant::DB_CONFIG_USERNAME => 'root',
+        f_constant\Constant::DB_CONFIG_PASSWORD => '',
         f_constant\Constant::DB_CONFIG_TAB_PREFIX => '',
-        f_constant\Constant::DB_CONFIG_OPTIONS => array(
-            \PDO::ATTR_PERSISTENT => false
-        )
+        f_constant\Constant::DB_CONFIG_OPTIONS => array()
     )
 );
+// \PDO::ATTR_PERSISTENT => false
+
+
+
+return $config;
