@@ -1,5 +1,7 @@
 <?php
 
+set_include_path(get_include_path() . PATH_SEPARATOR . SYS_PATH . 'fly' . DS . 'SysException.php');
+
 /**
  * @param $className
  *
@@ -7,7 +9,6 @@
  */
 function autoload($className)
 {
-    set_include_path(get_include_path() . PATH_SEPARATOR . SYS_PATH . 'fly' . DS . 'SysException.php');
 
     if (empty($className)) {
         throw new \fly\fly\SysException(json_encode(array(
