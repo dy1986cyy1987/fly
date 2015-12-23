@@ -1,6 +1,6 @@
 <?php
 
-set_include_path(get_include_path() . PATH_SEPARATOR . SYS_PATH . 'fly' . DS . 'SysException.php');
+set_include_path(get_include_path() . PATH_SEPARATOR . SYS_PATH . 'fly');
 
 /**
  * @param $className
